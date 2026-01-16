@@ -8,7 +8,7 @@ Was hat sich seit gestern geändert?
 
 Wer hat wann was geändert — und warum?
 
-Welche Version ist betroffen?
+Welche Version ist betroffen  ?
 
 Welche Fehler sind in dieser Version schon behoben?
 
