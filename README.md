@@ -1,24 +1,37 @@
-assign led[1] =
-(sw[3] | sw[2] | ~sw[1]) &
-(sw[3] | ~sw[2] | sw[1]) &
-(~sw[3] | sw[2] | sw[1]) &
-(~sw[3] | ~sw[2] | sw[1]) &
-(~sw[3] | ~sw[2] | ~sw[1]);
+module v2_require_4(
+    input  [3:0] btn,
+    output [5:0] led
+);
 
-assign led[2] =
-(sw[7] | sw[6] | sw[5] | sw[4]) &
-(sw[7] | sw[6] | sw[5] | ~sw[4]) &
-(sw[7] | sw[6] | ~sw[5] | sw[4]) &
-(sw[7] | sw[6] | ~sw[5] | ~sw[4]) &
-(sw[7] | ~sw[6] | sw[5] | sw[4]) &
-(sw[7] | ~sw[6] | sw[5] | ~sw[4]) &
-(sw[7] | ~sw[6] | ~sw[5] | sw[4]) &
-(sw[7] | ~sw[6] | ~sw[5] | ~sw[4]) &
-(~sw[7] | sw[6] | sw[5] | sw[4]) &
-(~sw[7] | sw[6] | sw[5] | ~sw[4]) &
-(~sw[7] | sw[6] | ~sw[5] | sw[4]) &
-(~sw[7] | sw[6] | ~sw[5] | ~sw[4]);
+// Example logic (cleaned and valid)
 
+assign led[0] = ( btn[0] & ~btn[1] & ~btn[2] & ~btn[3]) |
+                (~btn[0] &  btn[1] & ~btn[2] & ~btn[3]) |
+                (~btn[0] & ~btn[1] &  btn[2] & ~btn[3]) |
+                (~btn[0] & ~btn[1] & ~btn[2] &  btn[3]);
+
+assign led[1] = ( btn[0] &  btn[1] & ~btn[2] & ~btn[3]) |
+                ( btn[0] & ~btn[1] &  btn[2] & ~btn[3]) |
+                (~btn[0] &  btn[1] & ~btn[2] &  btn[3]) |
+                (~btn[0] & ~btn[1] &  btn[2] &  btn[3]);
+
+assign led[2] = ( btn[0] &  btn[1] &  btn[2] & ~btn[3]) |
+                ( btn[0] &  btn[1] & ~btn[2] &  btn[3]) |
+                ( btn[0] & ~btn[1] &  btn[2] &  btn[3]) |
+                (~btn[0] &  btn[1] &  btn[2] &  btn[3]);
+
+assign led[3] = btn[0] & btn[1] & btn[2] & btn[3];
+
+// All OFF condition
+assign led[4] = ~btn[0] & ~btn[1] & ~btn[2] & ~btn[3];
+
+// XOR (odd parity)
+assign led[5] = btn[0] ^ btn[1] ^ btn[2] ^ btn[3];
+
+// If you actually want EVEN parity instead, use:
+// assign led[5] = ~(btn[0] ^ btn[1] ^ btn[2] ^ btn[3]);
+
+endmodule
 # 3. Circuit 4
 
 module top(
