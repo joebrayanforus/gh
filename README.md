@@ -37,18 +37,19 @@ module top(
 
 wire [2:0] count;
 
+// Count how many buttons are pressed
 assign count = btn[0] + btn[1] + btn[2] + btn[3];
 
-// Exactly 1 pressed
+// Exactly one pressed
 assign led[0] = (count == 1);
 
-// Exactly 2 pressed
+// Exactly two pressed
 assign led[1] = (count == 2);
 
-// Exactly 3 pressed
+// Exactly three pressed
 assign led[2] = (count == 3);
 
-// All 4 pressed
+// All four pressed
 assign led[3] = (count == 4);
 
 // Odd number (1 or 3)
