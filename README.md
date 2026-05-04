@@ -20,7 +20,7 @@ assign led[2] =
 
 endmodule
 
-r4
+#r4
 module top(
     input [7:0] sw,
     output [3:0] led
@@ -30,6 +30,22 @@ assign led[3] = // your simplified Circuit 4 logic
 
 endmodule
 
+#c1 
+module top(
+    input [7:0] sw,
+    input [3:0] btn,
+    output [7:0] led
+);
+
+assign led[0] =
+btn[0] &
+(
+(sw[4:0] == 5'b10010) |
+(sw[4:0] == 5'b00101) |
+(sw[4:0] == 5'b11010)
+);
+
+endmodule
 📘 Kompakte, prüfungsorientierte Zusammenfassung: Konfigurationsmanagement (KM)
 🎯 Ziel des Konfigurationsmanagements
 Konfigurationsmanagement sorgt dafür, dass ein sich ständig weiterentwickelndes Softwaresystem beherrschbar, nachvollziehbar und reproduzierbar bleibt.
