@@ -20,7 +20,7 @@ assign led[2] =
 
 endmodule
 
-#r4
+# 3. Circuit 4
 module top(
     input [7:0] sw,
     output [3:0] led
@@ -29,24 +29,35 @@ module top(
 assign led[3] = // your simplified Circuit 4 logic
 
 endmodule
-
-#c1 
+#r4
 module top(
-    input [7:0] sw,
-    input [3:0] btn,
-    output [7:0] led
+    input  [3:0] btn,
+    output [5:0] led
 );
 
-assign led[0] =
-btn[0] &
-(
-(sw[4:0] == 5'b10010) |
-(sw[4:0] == 5'b00101) |
-(sw[4:0] == 5'b11010)
-);
+wire [2:0] count;
+
+assign count = btn[0] + btn[1] + btn[2] + btn[3];
+
+// Exactly 1 pressed
+assign led[0] = (count == 1);
+
+// Exactly 2 pressed
+assign led[1] = (count == 2);
+
+// Exactly 3 pressed
+assign led[2] = (count == 3);
+
+// All 4 pressed
+assign led[3] = (count == 4);
+
+// Odd number (1 or 3)
+assign led[4] = count[0];
+
+// Even number (0,2,4)
+assign led[5] = ~count[0];
 
 endmodule
-
 #Full Combined Challenge File
 module top(
     input  [11:0] sw,
