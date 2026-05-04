@@ -20,7 +20,15 @@ assign led[2] =
 
 endmodule
 
+r4
+module top(
+    input [7:0] sw,
+    output [3:0] led
+);
 
+assign led[3] = // your simplified Circuit 4 logic
+
+endmodule
 
 📘 Kompakte, prüfungsorientierte Zusammenfassung: Konfigurationsmanagement (KM)
 🎯 Ziel des Konfigurationsmanagements
