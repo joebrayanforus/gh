@@ -46,6 +46,27 @@ btn[0] &
 );
 
 endmodule
+
+#Full Combined Challenge File
+module top(
+    input  [11:0] sw,
+    input  [3:0] btn,
+    output [9:0] led
+);
+
+// Challenge 1
+assign led[1] =
+btn[0] &
+(
+(sw[4:0] == 5'b10010) |
+(sw[4:0] == 5'b00101) |
+(sw[4:0] == 5'b11010)
+);
+
+// Challenge 2
+assign led[0] = sw[8] | sw[9] | sw[10] | sw[11];
+
+endmodule
 📘 Kompakte, prüfungsorientierte Zusammenfassung: Konfigurationsmanagement (KM)
 🎯 Ziel des Konfigurationsmanagements
 Konfigurationsmanagement sorgt dafür, dass ein sich ständig weiterentwickelndes Softwaresystem beherrschbar, nachvollziehbar und reproduzierbar bleibt.
