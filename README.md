@@ -3,8 +3,6 @@ module v2_require_4(
     output [5:0] led
 );
 
-// Example logic (cleaned and valid)
-
 assign led[0] = ( btn[0] & ~btn[1] & ~btn[2] & ~btn[3]) |
                 (~btn[0] &  btn[1] & ~btn[2] & ~btn[3]) |
                 (~btn[0] & ~btn[1] &  btn[2] & ~btn[3]) |
@@ -12,6 +10,8 @@ assign led[0] = ( btn[0] & ~btn[1] & ~btn[2] & ~btn[3]) |
 
 assign led[1] = ( btn[0] &  btn[1] & ~btn[2] & ~btn[3]) |
                 ( btn[0] & ~btn[1] &  btn[2] & ~btn[3]) |
+                ( btn[0] & ~btn[1] & ~btn[2] &  btn[3]) |
+                (~btn[0] &  btn[1] &  btn[2] & ~btn[3]) |
                 (~btn[0] &  btn[1] & ~btn[2] &  btn[3]) |
                 (~btn[0] & ~btn[1] &  btn[2] &  btn[3]);
 
@@ -22,14 +22,13 @@ assign led[2] = ( btn[0] &  btn[1] &  btn[2] & ~btn[3]) |
 
 assign led[3] = btn[0] & btn[1] & btn[2] & btn[3];
 
-// All OFF condition
-assign led[4] = ~btn[0] & ~btn[1] & ~btn[2] & ~btn[3];
+assign led[4] = btn[0] ^ btn[1] ^ btn[2] ^ btn[3];
 
-// XOR (odd parity)
-assign led[5] = btn[0] ^ btn[1] ^ btn[2] ^ btn[3];
+// assign led[5] = btn[0] ^ btn[1] ^ btn[2] ^ btn[3];
 
-// If you actually want EVEN parity instead, use:
-// assign led[5] = ~(btn[0] ^ btn[1] ^ btn[2] ^ btn[3]);
+// LED 5 is ON when an even number of inputs is asserted
+assign led[5] = ~(btn[0] ^ btn[1] ^ btn[2] ^ btn[3]) &
+                (btn[0] | btn[1] | btn[2] | btn[3]);
 
 endmodule
 # 3. Circuit 4
