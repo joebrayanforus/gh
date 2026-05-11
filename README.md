@@ -23,8 +23,3 @@ endmodule
 
 
 
-Hunks brauchen Kontextzeilen und müssen getrennt sein.
-
-Diff‑Tools arbeiten heuristisch, da sie keine Änderungsoperationen kennen.
-
-Unified Diff ist das gängigste Format.
