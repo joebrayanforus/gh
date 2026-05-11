@@ -1,25 +1,32 @@
-
-
 `timescale 1ns / 1ps
-module majority_of_five(
-    input  [4:0] sw,
-    output [0:0] led
 
-);
+module majority_of_five_tb;
 
-assign led[0] =
-(sw[0] & sw[1] & sw[2]) | // ABC
-(sw[0] & sw[1] & sw[3]) | // ABD
-(sw[0] & sw[1] & sw[4]) | // ABE
-(sw[0] & sw[2] & sw[3]) | // ACD
-(sw[0] & sw[2] & sw[4]) | // ACE
-(sw[0] & sw[3] & sw[4]) | // ADE
-(sw[1] & sw[2] & sw[3]) | // BCD
-(sw[1] & sw[2] & sw[4]) | // BCE
-(sw[1] & sw[3] & sw[4]) | // BDE
-(sw[2] & sw[3] & sw[4]);  // CDE
+    // Inputs
+    reg  [4:0] sw;
+
+    // Outputs (must match your module!)
+    wire [0:0] led;
+
+    // Instantiate the Circuit Under Test (CUT)
+    majority_of_five cut (
+        .sw(sw),
+        .led(led)
+    );
+
+    integer k;
+
+    initial begin
+        sw = 0;
+
+        // Apply all 32 input combinations
+        for (k = 0; k < 32; k = k + 1) begin
+            #20 sw = k;
+        end
+
+        #20 $finish;
+    end
 
 endmodule
-
 
 
